@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="bg">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Регистрация</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                height: 100vh;
+                width: 100%;
+                background-color: #88a8ef;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin: 0;
+            }
+
+            .error {
+                font-weight: bolder;
+                color: #dd0033;
+            }
+
+            form {
+                background-color: #6eb5ff;
+                box-sizing: border-box;
+                width: 50%;
+                max-width: 427px;
+                padding: 31px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                border: 1px solid navy;
+            }
+
+            label {
+                margin-bottom: 6px;
+            }
+
+            input,
+            button {
+                padding: 8px;
+                box-sizing: border-box;
+                height: 38px;
+                width: 100%;
+                border: 2px solid red;
+                margin-bottom: 12px;
+            }
+
+            input:hover,
+            input:focus,
+            button:hover,
+            button:focus {
+                outline: none;
+                border-color: navy;
+            }
+
+            input:valid {
+                border: 2px solid #d8e9ff;
+            }
+
+            #buttons-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            button {
+                width: 45%;
+                margin-bottom: 0;
+                background-color: #d8e9ff;
+                border-color: #d8e9ff;
+            }
+
+            button:hover {
+                background-color: #c8d9ff;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="registration-form">
+            <label for="email">Имейл:</label>
+            <input type="email" id="email" required />
+
+            <label for="password">Парола:</label>
+            <input
+                type="password"
+                id="password"
+                required
+                minlength="6"
+                maxlength="10"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,255}$"
+            />
+
+            <div id="buttons-container">
+                <button type="button" id="registerButton">Регистрация</button>
+                <button type="button" id="loginButton">Вход</button>
+            </div>
+        </form>
+
+        <p class="error"></p>
+
+        <script>
+            const onError = (message) => {
+                const errorElement = document.querySelector(".error");
+                errorElement.textContent = message;
+            };
+
+            const onSuccess = () => {
+                // Препрати към editor.html след успешно влизане
+                window.location.href = "editor.html";
+            };
+
+            const validateFields = () => {
+                // Валидация на полетата
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                // Проверка за валиден имейл
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    onError("Моля, въведете валиден имейл адрес.");
+                    return false;
+                }
+
+                // Проверка за валидна парола
+                const passwordRegex =
+                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,255}$/;
+                if (!passwordRegex.test(password)) {
+                    onError(
+                        "Паролата трябва да съдържа главни и малки букви, цифри и да е поне 6 символа."
+                    );
+                    return false;
+                }
+
+                return true;
+            };
+
+            document
+                .getElementById("registerButton")
+                .addEventListener("click", async () => {
+                    if (!validateFields()) {
+                        return;
+                    }
+
+                    const response = await fetch("register.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: new URLSearchParams({
+                            email: document.getElementById("email").value,
+                            password: document.getElementById("password").value,
+                        }),
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        onSuccess();
+                    } else {
+                        onError(result.error || "Регистрацията не е успешна");
+                    }
+                });
+
+            document
+                .getElementById("loginButton")
+                .addEventListener("click", async () => {
+                    if (!validateFields()) {
+                        return;
+                    }
+
+                    const response = await fetch("login.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: new URLSearchParams({
+                            email: document.getElementById("email").value,
+                            password: document.getElementById("password").value,
+                        }),
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        onSuccess();
+                    } else {
+                        onError(result.error || "Влизането не е успешно");
+                    }
+                });
+        </script>
+    </body>
+</html>

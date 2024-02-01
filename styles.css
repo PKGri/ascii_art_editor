@@ -1,0 +1,153 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+    margin: 0;
+    background-color: #6eb5ff;
+}
+
+#app {
+    height: 100%;
+    display: flex;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 20%;
+    max-width: 400px;
+    font-size: larger;
+    background-color: #748cab;
+}
+
+aside input {
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 10px;
+}
+
+#controls li {
+    padding: 2px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #d8e9ff;
+    border-color: #d8e9ff;
+}
+
+.actionButton {
+    height: 1.5em;
+    width: 1.5em;
+    text-align: center;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.metaButton {
+    width: 5em;
+}
+
+#artworksDropdown {
+    font-size: large;
+    width: 60%;
+    margin-right: 10px;
+}
+
+#importFile {
+    width: auto;
+    font-size: medium;
+}
+
+.actionButton:hover {
+    background-color: #ddd;
+    background-color: #c8d9ff;
+}
+
+#grid-container {
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(100, 9px);
+    gap: 0;
+    background-color: #eee;
+    border: 20px solid white;
+    outline: 2px solid black;
+    user-select: none;
+    text-align: center;
+}
+
+.cell {
+    width: 8px;
+    height: 12px;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    line-height: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.noGrid {
+    border: 1px solid #eee;
+}
+
+.cell:focus {
+    background-color: #ddd;
+    outline: none;
+    caret-color: transparent;
+}
+
+@media (max-width: 1400px) {
+    #grid {
+        display: grid;
+        grid-template-columns: repeat(100, 7px);
+        gap: 0;
+        background-color: #eee;
+        border: 20px solid white;
+        outline: 2px solid black;
+        user-select: none;
+        text-align: center;
+    }
+
+    .actionButton {
+        text-align: center;
+        font-weight: bolder;
+        font-size: large;
+    }
+
+    #controls li {
+        font-size: 0.88em;
+        padding: 2px;
+    }
+
+    .cell {
+        width: 6px;
+        height: 10px;
+        font-family: monospace, monospace;
+        font-size: 12px;
+        line-height: 10px;
+        border: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+}

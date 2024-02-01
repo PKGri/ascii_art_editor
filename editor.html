@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>ASCII Art Editor</title>
+</head>
+<body>
+    <div id="app">
+        <aside>
+            <section>
+                <label for="charInput">Избери символ:</label>
+                <input type="text" id="charInput" class="singleCharInput" value="X">
+            </section>
+
+            <section>
+                <button id="clearGrid" class="actionButton" title="Изчисти">X</button>
+                <button id="toggleGrid" class="actionButton" title="Превключи маркировка">#</button>
+            </section>
+
+            <section class="buttonSection">
+                <label for="replaceInput">Кой символ да заменя:</label>
+                <input type="text" id="replaceInput" class="singleCharInput" value=" ">
+            </section>
+            
+            <section>
+                <label for="replaceWithInput">С кой символ да заменя:</label>
+                <input type="text" id="replaceWithInput" class="singleCharInput" value=" ">
+                <button id="replaceButton" class="actionButton" title="Замени">~</button>
+            </section>
+
+            <section>
+                <select id="artworksDropdown"></select>
+                <button id="loadButton" class="actionButton metaButton" title="Зареди">Зареди</button>
+            </section>
+
+            <section>
+                <button id="saveButton" class="actionButton metaButton" title="Запази">Запази</button>
+            </section>
+
+            <section>
+                <button id="exportButton" class="actionButton metaButton" title="Изтегли">Изтегли</button>
+            </section>
+            <section>
+                <input type="file" id="importFile" accept=".txt">
+                <button id="importButton" class="actionButton metaButton" title="Качи">Качи</button>
+            </section>
+
+            <section>
+                <button id="logoutButton" class="actionButton metaButton" title="Излез">Излез</button>
+            </section>
+
+            <section id="controls">
+                <ol>
+                    <li>Клик върху клетка пуска режим на писане</li>
+                    <li>Задържане и местене с LMB е свободно рисуване</li>
+                    <li>Задържане и местене с Shift+LMB е рисуване на права линия</li>
+                    <li>Задържане и местене с RMB е рисуване на правоъгълник</li>
+                    <li>Задържане и местене с Shift+RMB е рисуване на елипса</li>
+                </ol>
+            </section>
+        </aside>
+
+        <main id="grid-container">
+            <div id="grid"></div>
+        </main>
+    </div>
+
+    <footer>
+        <script src="script.js"></script>
+    </footer>
+</body>
+</html>
